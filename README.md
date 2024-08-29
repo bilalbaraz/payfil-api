@@ -70,7 +70,7 @@ Thank you for contributing!
 
 ## Coding Standards
 
-This project adheres to the PSR-12 coding standard.
+This project adheres to the [PSR-12](https://www.php-fig.org/psr/psr-12/) coding standard.
 
 ## Credits
 
