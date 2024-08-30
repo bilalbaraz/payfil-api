@@ -37,7 +37,7 @@ class CreateTokenRequest extends FormRequest
                     'success' => false,
                     'data' => $validator->errors(),
                 ],
-                401
+                400
             )
         );
     }
