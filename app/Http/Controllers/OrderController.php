@@ -81,7 +81,7 @@ class OrderController extends Controller
 
         $order = $this->orderService->createOrder($checkoutRequest);
         $order->transaction()->create([
-            'bin_number' => '123',
+            'bin_number' => '123456',
             'card_type' => CardTypeEnums::CREDIT_CARD,
             'card_association' => CardAssociationEnums::AMERICAN_EXPRESS,
             'card_family' => CardFamilyEnums::ADVANTAGE,

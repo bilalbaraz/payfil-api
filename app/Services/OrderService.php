@@ -23,14 +23,32 @@ class OrderService
         return $this->order
             ->with(['product', 'paymentProvider', 'transaction'])
             ->when(
-                array_key_exists('payment_provider_ids', $filters) && count($filters) > 0,
+                array_key_exists('payment_provider_ids', $filters) && count($filters['payment_provider_ids']) > 0,
                 function ($query) use ($filters) {
                     $query->whereIn('payment_provider_id', $filters['payment_provider_ids']);
                 }
             )
+            ->when(
+                array_key_exists('starts_at', $filters),
+                function ($query) use ($filters) {
+                    $query->whereDate('created_at', '>=', $filters['starts_at']);
+                }
+            )
+            ->when(
+                array_key_exists('ends_at', $filters),
+                function ($query) use ($filters) {
+                    $query->whereDate('created_at', '<=', $filters['ends_at']);
+                }
+            )
+            ->when(
+                array_key_exists('currencies', $filters) && count($filters['currencies']) > 0,
+                function ($query) use ($filters) {
+                    $query->whereIn('currency', $filters['currencies']);
+                }
+            )
             ->where('user_id', $userId)
             ->orderByDesc('id')
-            ->paginate(2);
+            ->paginate(10);
     }
 
     public function createOrder(array $checkoutData): ?Order

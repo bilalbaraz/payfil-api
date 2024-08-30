@@ -26,6 +26,10 @@ class OrderFilterRequest extends FormRequest
         return [
             'payment_provider_ids' => 'array|nullable',
             'payment_provider_ids.*' => 'exists:payment_providers,id',
+            'starts_at' => 'nullable|date|before_or_equal:ends_at',
+            'ends_at' => 'nullable|date|after_or_equal:starts_at',
+            'currencies' => 'nullable',
+            'currencies.*' => 'in:EUR,USD,TRY',
         ];
     }
 
