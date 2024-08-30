@@ -12,11 +12,18 @@ class UserController extends Controller
 {
     private UserService $userService;
 
+    /**
+     * @param UserService $userService
+     */
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
     }
 
+    /**
+     * @param CreateTokenRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function createToken(CreateTokenRequest $request)
     {
         $data = $request->validated();
