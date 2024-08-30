@@ -9,6 +9,7 @@ use Laravel\Sanctum\NewAccessToken;
 class UserService
 {
     private User $user;
+
     private Carbon $carbon;
 
     /**
@@ -38,6 +39,6 @@ class UserService
      */
     public function createTokenByUser(User $user, array $abilities, Carbon $expiresAt): NewAccessToken
     {
-        return $user->createToken('token_' . $this->carbon::now()->format('dmY'), $abilities, $expiresAt);
+        return $user->createToken('token_'.$this->carbon::now()->format('dmY'), $abilities, $expiresAt);
     }
 }
