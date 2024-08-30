@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\AbilityEnums;
-use App\Http\Requests\CreateTokenRequest;
+use App\Http\Requests\User\CreateTokenRequest;
 use App\Services\UserService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
