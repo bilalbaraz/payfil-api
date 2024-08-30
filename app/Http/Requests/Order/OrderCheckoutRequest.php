@@ -26,8 +26,8 @@ class OrderCheckoutRequest extends FormRequest
         return [
             'payment_provider_id' => 'required|exists:payment_providers,id',
             'product_id' => 'required|exists:products,id',
-            'expire_month' => 'required',
-            'expire_year' => 'required',
+            'expire_month' => 'required|integer|between:1,12',
+            'expire_year' => 'required|integer|digits:4',
             'card_number' => 'required',
             'card_holdername' => 'required',
             'cvc' => 'required',

@@ -6,6 +6,7 @@ use App\Http\Requests\Order\OrderCheckoutRequest;
 use App\Http\Requests\Order\OrderFilterRequest;
 use App\Services\OrderService;
 use App\Services\ProductService;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -31,6 +32,28 @@ class OrderController extends Controller
     public function checkout(OrderCheckoutRequest $request)
     {
         $data = $request->validated();
+
+        if ($data['expire_year'] < (int)Carbon::now()->format('Y')) {
+            return response()->json([
+                'success' => false,
+                'data' => [
+                    'expire_year' => ['expire_year is expired'],
+                ],
+            ]);
+        }
+
+        if (
+            $data['expire_year'] === (int)Carbon::now()->format('Y') &&
+            $data['expire_month'] < Carbon::now()->month
+        ) {
+            return response()->json([
+                'success' => false,
+                'data' => [
+                    'expire_month' => ['expire_month is expired'],
+                ],
+            ]);
+        }
+
         $user = $request->user();
         $product = $this->productService->getProductByProductId($data['product_id']);
         $orderNumber = $this->orderService->generateOrderNumber($user->id, $product->id);
