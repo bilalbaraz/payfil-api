@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/tokens/create', function (Request $request) {
     $user = User::query()->where('email', $request->get('email'))->first();
 
-    if (!$user || !Hash::check($request->get('password'), $user->password)) {
+    if (! $user || ! Hash::check($request->get('password'), $user->password)) {
         return ['success' => false, 'error' => 'Invalid credentials'];
     }
 
