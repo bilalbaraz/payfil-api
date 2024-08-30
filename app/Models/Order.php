@@ -22,6 +22,8 @@ class Order extends Model
         'currency',
     ];
 
+    protected $casts = ['unit_price' => 'float'];
+
     protected $appends = ['total_amount'];
 
     public function getTotalAmountAttribute(): float
