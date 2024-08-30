@@ -31,9 +31,14 @@ class CreateTokenRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json([
-            'success' => false,
-            'data' => $validator->errors(),
-        ]));
+        throw new HttpResponseException(
+            response()->json(
+                [
+                    'success' => false,
+                    'data' => $validator->errors(),
+                ],
+                401
+            )
+        );
     }
 }

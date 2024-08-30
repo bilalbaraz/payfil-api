@@ -22,11 +22,11 @@ class UserController extends Controller
         $user = $this->userService->getUserByEmail($data['email']);
 
         if (! $user || ! Hash::check($request->get('password'), $user->password)) {
-            return ['success' => false, 'error' => 'Invalid credentials'];
+            return response()->json(['success' => false, 'error' => 'Invalid credentials'], 401);
         }
 
         $token = $this->userService->createTokenByUser($user, ['order:list', 'order:checkout'], Carbon::now()->addHour());
 
-        return ['token' => $token->plainTextToken];
+        return response()->json(['success' => true, 'token' => $token->plainTextToken], 401);
     }
 }
