@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Carbon\Carbon;
+use Laravel\Sanctum\NewAccessToken;
 
 class UserService
 {
@@ -19,7 +20,7 @@ class UserService
         return $this->user->where('email', $email)->first();
     }
 
-    public function createTokenByUser(User $user, array $abilities, Carbon $expiresAt)
+    public function createTokenByUser(User $user, array $abilities, Carbon $expiresAt): NewAccessToken
     {
         return $user->createToken('personal_access_token', $abilities, $expiresAt);
     }
