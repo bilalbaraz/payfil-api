@@ -5,6 +5,7 @@ namespace App\Http\Requests\Order;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use MarvinLabs\Luhn\Rules\LuhnRule;
 
 class OrderCheckoutRequest extends FormRequest
 {
@@ -28,7 +29,12 @@ class OrderCheckoutRequest extends FormRequest
             'product_id' => 'required|exists:products,id',
             'expire_month' => 'required|integer|between:1,12',
             'expire_year' => 'required|integer|digits:4',
-            'card_number' => 'required',
+            'card_number' => [
+                'required',
+                'numeric',
+                'digits_between:13,19',
+                new LuhnRule(),
+            ],
             'card_holdername' => 'required',
             'cvc' => 'required',
             'installment' => 'required|in:1,2,3,6,9,12',
