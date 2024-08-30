@@ -21,7 +21,7 @@ class OrderService
     public function getOrdersByUser(int $userId, array $filters = []): Collection
     {
         return $this->order
-            ->with(['product', 'paymentProvider'])
+            ->with(['product', 'paymentProvider', 'transaction'])
             ->when(
                 array_key_exists('payment_provider_ids', $filters) && count($filters) > 0,
                 function ($query) use ($filters) {
@@ -32,7 +32,7 @@ class OrderService
             ->get();
     }
 
-    public function checkout(array $checkoutData): ?Order
+    public function createOrder(array $checkoutData): ?Order
     {
         return $this->order->create($checkoutData);
     }

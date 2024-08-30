@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CardAssociationEnums;
+use App\Enums\CardFamilyEnums;
+use App\Enums\CardTypeEnums;
 use App\Http\Requests\Order\OrderCheckoutRequest;
 use App\Http\Requests\Order\OrderFilterRequest;
 use App\Services\OrderService;
@@ -76,7 +79,13 @@ class OrderController extends Controller
             'currency' => $product->currency,
         ];
 
-        $this->orderService->checkout($checkoutRequest);
+        $order = $this->orderService->createOrder($checkoutRequest);
+        $order->transaction()->create([
+            'bin_number' => '123',
+            'card_type' => CardTypeEnums::CREDIT_CARD,
+            'card_association' => CardAssociationEnums::AMERICAN_EXPRESS,
+            'card_family' => CardFamilyEnums::ADVANTAGE,
+        ]);
 
         return response()->json(['success' => true]);
     }
