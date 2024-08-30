@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Model;
+namespace Tests\Unit\Models;
 
 use App\Enums\CardAssociationEnums;
 use App\Enums\CardFamilyEnums;
@@ -13,8 +13,9 @@ use App\Models\User;
 use Carbon\Carbon;
 use Tests\TestCase;
 
-class OrderTest extends TestCase
+class TransactionTest extends TestCase
 {
+    private Transaction $transaction;
     private Order $order;
 
     public function setUp(): void
@@ -44,7 +45,7 @@ class OrderTest extends TestCase
         ];
 
         $this->order = Order::query()->create($checkoutRequest);
-        $this->order->transaction()->create([
+        $this->transaction = $this->order->transaction()->create([
             'bin_number' => '123456',
             'card_type' => CardTypeEnums::CREDIT_CARD,
             'card_association' => CardAssociationEnums::AMERICAN_EXPRESS,
@@ -56,49 +57,9 @@ class OrderTest extends TestCase
      * @test
      * @return void
      */
-    public function it_should_have_belongs_to_relation_with_product(): void
+    public function it_should_have_has_one_to_relation_with_order(): void
     {
-        $this->assertInstanceOf(Product::class, $this->order->product);
-        $this->assertNotNull($this->order->product);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function it_should_have_belongs_to_relation_with_payment_provider(): void
-    {
-        $this->assertInstanceOf(PaymentProvider::class, $this->order->paymentProvider);
-        $this->assertNotNull($this->order->paymentProvider);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function it_should_have_total_amount(): void
-    {
-        $this->assertNotNull($this->order->total_amount);
-        $this->assertEquals($this->order->total_amount, $this->order->unit_price * $this->order->quantity);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function it_should_have_belongs_to_relation_with_user(): void
-    {
-        $this->assertInstanceOf(User::class, $this->order->user);
-        $this->assertNotNull($this->order->user);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function it_should_have_belongs_to_relation_with_transaction(): void
-    {
-        $this->assertInstanceOf(Transaction::class, $this->order->transaction);
-        $this->assertNotNull($this->order->transaction);
+        $this->assertInstanceOf(Order::class, $this->transaction->order);
+        $this->assertNotNull($this->transaction->order);
     }
 }
