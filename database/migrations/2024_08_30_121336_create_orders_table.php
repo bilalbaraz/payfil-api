@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('order_number')->unique();
             $table->longText('shipping_address');
             $table->longText('billing_address');
+            $table->integer('quantity')->default(1);
+            $table->decimal('unit_price', 9, 4);
+            $table->string('currency');
             $table->softDeletes();
             $table->timestamps();
         });

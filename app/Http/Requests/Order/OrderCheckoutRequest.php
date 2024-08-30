@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Order;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class OrderCheckoutRequest extends FormRequest
 {
@@ -22,7 +24,30 @@ class OrderCheckoutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'payment_provider_id' => 'required|exists:payment_providers,id',
+            'product_id' => 'required|exists:products,id',
+            'expire_month' => 'required',
+            'expire_year' => 'required',
+            'card_number' => 'required',
+            'card_holdername' => 'required',
+            'cvc' => 'required',
+            'installment' => 'required|in:1,2,3,6,9,12',
+            'shipping_address' => 'required',
+            'billing_address' => 'required',
+            'quantity' => 'required|min:1',
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            response()->json(
+                [
+                    'success' => false,
+                    'data' => $validator->errors(),
+                ],
+                400
+            )
+        );
     }
 }

@@ -15,4 +15,9 @@ class ProductService
     {
         $this->product = $product;
     }
+
+    public function getProductByProductId(int $productId): ?Product
+    {
+        return $this->product->where('id', $productId)->first();
+    }
 }

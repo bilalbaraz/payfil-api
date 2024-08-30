@@ -17,7 +17,17 @@ class Order extends Model
         'order_number',
         'shipping_address',
         'billing_address',
+        'quantity',
+        'unit_price',
+        'currency',
     ];
+
+    protected $appends = ['total_amount'];
+
+    public function getTotalAmountAttribute(): float
+    {
+        return $this->attributes['quantity'] * $this->attributes['unit_price'];
+    }
 
     public function user(): BelongsTo
     {
