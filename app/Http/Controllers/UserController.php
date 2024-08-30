@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AbilityEnums;
 use App\Http\Requests\CreateTokenRequest;
 use App\Services\UserService;
 use Carbon\Carbon;
@@ -25,8 +26,12 @@ class UserController extends Controller
             return response()->json(['success' => false, 'error' => 'Invalid credentials'], 401);
         }
 
-        $token = $this->userService->createTokenByUser($user, ['order:list', 'order:checkout'], Carbon::now()->addHour());
+        $token = $this->userService->createTokenByUser(
+            $user,
+            [AbilityEnums::ORDER_LIST, AbilityEnums::ORDER_CHECKOUT],
+            Carbon::now()->addHour()
+        );
 
-        return response()->json(['success' => true, 'token' => $token->plainTextToken], 401);
+        return response()->json(['success' => true, 'token' => $token->plainTextToken], 200);
     }
 }
