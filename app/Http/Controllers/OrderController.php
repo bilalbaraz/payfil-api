@@ -29,7 +29,7 @@ class OrderController extends Controller
         $user = $request->user();
         $orders = $this->orderService->getOrdersByUser($user->id, $filters);
 
-        return response()->json(['success' => true, 'count' => $orders->count(), 'orders' => $orders]);
+        return response()->json($orders);
     }
 
     public function checkout(OrderCheckoutRequest $request)

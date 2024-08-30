@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Order;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class OrderService
 {
@@ -18,7 +18,7 @@ class OrderService
         $this->carbon = $carbon;
     }
 
-    public function getOrdersByUser(int $userId, array $filters = []): Collection
+    public function getOrdersByUser(int $userId, array $filters = []): LengthAwarePaginator
     {
         return $this->order
             ->with(['product', 'paymentProvider', 'transaction'])
@@ -29,7 +29,8 @@ class OrderService
                 }
             )
             ->where('user_id', $userId)
-            ->get();
+            ->orderByDesc('id')
+            ->paginate(2);
     }
 
     public function createOrder(array $checkoutData): ?Order
