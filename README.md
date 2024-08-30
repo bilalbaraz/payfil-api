@@ -1,5 +1,7 @@
 # PayFil - API
 
+[![Coverage Status](https://coveralls.io/repos/github/bilalbaraz/payfil-api/badge.svg)](https://coveralls.io/github/bilalbaraz/payfil-api)
+
 Welcome to the Payfil API Project, a robust solution designed to streamline payment processing for e-commerce platforms. Developed using the powerful Laravel framework, this API enables seamless payment transactions through multiple banks, providing a secure and efficient way to handle online sales.
 
 ## Installation

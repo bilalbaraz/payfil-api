@@ -1,0 +1,28 @@
+name: CI Workflow
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2.31.1
+        with:
+          php-version: 8.3
+      - name: Copy .env file
+        run: cp .env.example .env
+      - name: Run composer
+        run: composer install --no-interaction
+      - name: Execute unit tests
+        run: ./vendor/bin/phpunit --stderr --coverage-clover build/logs/clover.xml --coverage-text
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2.3.0
+        with:
+          coveralls-repo-token: ${{ secrets.COVERALLS_REPO_TOKEN }}
