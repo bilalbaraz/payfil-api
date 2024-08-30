@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Order;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class OrderFilterRequest extends FormRequest
 {
@@ -22,7 +24,21 @@ class OrderFilterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'payment_provider_ids' => 'array|nullable',
+            'payment_provider_ids.*' => 'exists:payment_providers,id',
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            response()->json(
+                [
+                    'success' => false,
+                    'data' => $validator->errors(),
+                ],
+                400
+            )
+        );
     }
 }

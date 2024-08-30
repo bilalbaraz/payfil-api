@@ -25,7 +25,7 @@ class OrderController extends Controller
         $user = $request->user();
         $orders = $this->orderService->getOrdersByUser($user->id, $filters);
 
-        return response()->json(['success' => true, 'orders' => $orders]);
+        return response()->json(['success' => true, 'count' => $orders->count(), 'orders' => $orders]);
     }
 
     public function checkout(OrderCheckoutRequest $request)
@@ -38,7 +38,7 @@ class OrderController extends Controller
         $checkoutRequest = [
             'order_number' => $orderNumber,
             'user_id' => $user->id,
-            'payment_provider_id' => 3,
+            'payment_provider_id' => $data['payment_provider_id'],
             'product_id' => $product->id,
             'expire_month' => $data['expire_month'],
             'expire_year' => $data['expire_year'],

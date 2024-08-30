@@ -20,7 +20,16 @@ class OrderService
 
     public function getOrdersByUser(int $userId, array $filters = []): Collection
     {
-        return $this->order->with(['product', 'paymentProvider'])->where('user_id', $userId)->get();
+        return $this->order
+            ->with(['product', 'paymentProvider'])
+            ->when(
+                array_key_exists('payment_provider_ids', $filters) && count($filters) > 0,
+                function ($query) use ($filters) {
+                    $query->whereIn('payment_provider_id', $filters['payment_provider_ids']);
+                }
+            )
+            ->where('user_id', $userId)
+            ->get();
     }
 
     public function checkout(array $checkoutData): ?Order
