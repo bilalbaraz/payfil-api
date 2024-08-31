@@ -121,6 +121,19 @@ Thank you for contributing!
 
 This project adheres to the [PSR-12](https://www.php-fig.org/psr/psr-12/) coding standard. [Laravel Pint](https://laravel.com/docs/11.x/pint) was used for PSR-12 checks during development.
 
+## Testing
+
+**Current Status:**
+
+![Current Unit Test Report](./docs/unit-testing-status.png)
+
+You can run the following command to generate and view the code coverage report in your local development environment:
+
+```bash
+./vendor/bin/sail test --coverage-html reports
+```
+This will allow you to view the report in the reports directory.
+
 ## Credits
 
 This project was made possible through the collaborative efforts of several individuals and organizations. We would like to extend our sincere gratitude to everyone who contributed to the development and success of this project.
@@ -172,17 +185,6 @@ This roadmap outlines the key milestones and upcoming features planned for the P
 
     - Achieve 100% code coverage for all unit and integration tests.
     - Regularly monitor and maintain code coverage to ensure all new features are fully tested.
-
-**Current Status:**
-
-![Current Unit Test Report](./docs/unit-testing-status.png)
-
-You can run the following command to generate and view the code coverage report in your local development environment:
-
-```bash
-./vendor/bin/sail test --coverage-html reports
-```
-This will allow you to view the report in the reports directory.
 
 ## Support
 
