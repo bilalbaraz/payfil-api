@@ -24,6 +24,8 @@ http://localhost/api
 | `email`    | `string` | Yes      | The email address of the user. Must be a valid email format. |
 | `password` | `string` | Yes      | The password of the user. Should meet security requirements (e.g., minimum length, complexity). |
 
+**Note:** You can find users' emails on `users` table. Passwords for all emails in the user table is `password`.
+
 ### 1. **Get Orders**
 
 **Endpoint:** `/orders`  
