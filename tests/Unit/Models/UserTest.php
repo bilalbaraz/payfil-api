@@ -8,14 +8,13 @@ use App\Enums\CardTypeEnums;
 use App\Models\Order;
 use App\Models\PaymentProvider;
 use App\Models\Product;
-use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Tests\TestCase;
 
-class TransactionTest extends TestCase
+class UserTest extends TestCase
 {
-    private Transaction $transaction;
     private Order $order;
 
     public function setUp(): void
@@ -45,7 +44,7 @@ class TransactionTest extends TestCase
         ];
 
         $this->order = Order::query()->create($checkoutRequest);
-        $this->transaction = $this->order->transaction()->create([
+        $this->order->transaction()->create([
             'bin_number' => '123456',
             'card_type' => CardTypeEnums::CREDIT_CARD,
             'card_association' => CardAssociationEnums::AMERICAN_EXPRESS,
@@ -57,9 +56,10 @@ class TransactionTest extends TestCase
      * @test
      * @return void
      */
-    public function it_should_have_belongs_to_relation_with_order(): void
+    public function it_should_have_has_many_relation_with_order(): void
     {
-        $this->assertInstanceOf(Order::class, $this->transaction->order);
-        $this->assertNotNull($this->transaction->order);
+        $user = User::query()->find(1);
+
+        $this->assertInstanceOf(Collection::class, $user->orders);
     }
 }

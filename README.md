@@ -119,7 +119,7 @@ Thank you for contributing!
 
 ## Coding Standards
 
-This project adheres to the [PSR-12](https://www.php-fig.org/psr/psr-12/) coding standard.
+This project adheres to the [PSR-12](https://www.php-fig.org/psr/psr-12/) coding standard. [Laravel Pint](https://laravel.com/docs/11.x/pint) was used for PSR-12 checks during development.
 
 ## Credits
 

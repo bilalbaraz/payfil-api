@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -19,8 +20,8 @@ class Transaction extends Model
         'card_family',
     ];
 
-    public function order(): HasOne
+    public function order(): BelongsTo
     {
-        return $this->hasOne(Order::class);
+        return $this->belongsTo(Order::class);
     }
 }
