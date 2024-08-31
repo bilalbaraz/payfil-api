@@ -168,6 +168,22 @@ This roadmap outlines the key milestones and upcoming features planned for the P
     - Cache frequently accessed data such as product listings, order histories, and user sessions.
     - Provide cache invalidation strategies to ensure data consistency.
 
+3. **Code Coverage**
+
+    - Achieve 100% code coverage for all unit and integration tests.
+    - Regularly monitor and maintain code coverage to ensure all new features are fully tested.
+
+**Current Status:**
+
+![Current Unit Test Report](./docs/unit-testing-status.png)
+
+You can run the following command to generate and view the code coverage report in your local development environment:
+
+```bash
+./vendor/bin/sail test --coverage-html reports
+```
+This will allow you to view the report in the reports directory.
+
 ## Support
 
 If you need assistance with the Payfil API Project, we're here to help! Below are the various ways you can get support.
