@@ -36,15 +36,16 @@ Ensure you have the following installed on your system:
     cp .env.example .env
     ```
 
-4. **Start Docker Containers**: Use Laravel Sail to start the Docker containers:
-
-    ```bash
-    ./vendor/bin/sail up -d
-    ```
-5. **Generate Application Key**: Generate the Laravel application key, which is used for encryption:
+4. **Generate Application Key**: Generate the Laravel application key, which is used for encryption:
 
     ```bash
     php artisan key:generate
+    ```
+
+5. **Start Docker Containers**: Use Laravel Sail to start the Docker containers:
+
+    ```bash
+    ./vendor/bin/sail up -d
     ```
 
 ## Contributing
