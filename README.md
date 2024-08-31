@@ -67,9 +67,10 @@ Your Payfil API development environment should now be up and running. You can be
 
 **Stop Docker Containers**: Use Laravel Sail to stop the Docker containers:
 
-    ```bash
-    ./vendor/bin/sail down
-    ```
+```bash
+./vendor/bin/sail down
+```
+
 ## API Endpoints Overview
 
 | Endpoint                      | Description                                            |
