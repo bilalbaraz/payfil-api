@@ -48,6 +48,38 @@ Ensure you have the following installed on your system:
     ./vendor/bin/sail up -d
     ```
 
+6. **Run Database Migrations with Seeders**: Set up your database by running the migrations:
+
+    ```bash
+    ./vendor/bin/sail artisan migrate --seed
+    ```
+
+This will create the necessary tables and seed the database with demo data.
+
+7. **Access the Application**:
+Once everything is set up, you can access the application in your browser at:
+
+    ```bash
+    http://localhost
+    ```
+
+Your Payfil API development environment should now be up and running. You can begin developing and testing the API according to your project's requirements.
+
+**Stop Docker Containers**: Use Laravel Sail to stop the Docker containers:
+
+    ```bash
+    ./vendor/bin/sail down
+    ```
+## API Endpoints Overview
+
+| Endpoint                      | Description                                            |
+|-------------------------------|--------------------------------------------------------|
+| `/orders`                     | Retrieves orders by authenticated user                                   |
+| `/orders/checkout`          | Checkout order                 |
+| `/tokens/create`   | Creates token by authenticated user                |
+
+You can check out the full list of endpoints by visiting the [endpoints](docs/endpoints.md) page.
+
 ## Contributing
 
 We welcome contributions from the community! Whether you're fixing a bug, adding a new feature, or improving documentation, your help is greatly appreciated. Please follow the guidelines below to ensure a smooth contribution process.

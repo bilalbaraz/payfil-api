@@ -16,6 +16,11 @@ class DatabaseSeeder extends Seeder
         User::query()->truncate();
         User::factory(5)->create();
 
+        $this->call([
+            PaymentProviderSeeder::class,
+            ProductSeeder::class,
+        ]);
+
         /*User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
