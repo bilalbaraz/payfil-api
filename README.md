@@ -152,6 +152,22 @@ If you encounter any issues while setting up or running the Payfil API Project, 
     docker logs <container_name>
     ```
 
+## Roadmap
+
+This roadmap outlines the key milestones and upcoming features planned for the Payfil API Project. Our goal is to continuously improve and expand the functionality of the API, ensuring it meets the evolving needs of our users.
+
+1. **Email Notifications**
+
+    - Implement email notifications for order confirmations, payment receipts, and status updates.
+    - Provide customizable email templates for different types of notifications.
+    - Ensure email deliverability and compliance with anti-spam regulations.
+
+2. **Caching**
+
+    - Implement a caching layer to improve API performance and reduce load times.
+    - Cache frequently accessed data such as product listings, order histories, and user sessions.
+    - Provide cache invalidation strategies to ensure data consistency.
+
 ## Support
 
 If you need assistance with the Payfil API Project, we're here to help! Below are the various ways you can get support.
