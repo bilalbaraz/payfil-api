@@ -125,7 +125,7 @@ This project adheres to the [PSR-12](https://www.php-fig.org/psr/psr-12/) coding
 
 **Current Status:**
 
-![Current Unit Test Report](./docs/unit-testing-status.png)
+![Current Unit Test Report](./docs/unit-test-status.png)
 
 You can run the following command to generate and view the code coverage report in your local development environment:
 
